@@ -1,0 +1,49 @@
+name: Update data
+
+on:
+  # Run every day at 3:00 UTC
+  schedule:
+    - cron: "0 3 * * *"
+  push:
+    paths:
+      - ".github/workflows/update-data.yml"
+      - "process/**"
+  pull_request:
+    paths:
+      - ".github/workflows/update-data.yml"
+      - "process/**"
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Use PHP 7.4
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.4
+          extensions: curl
+      - name: Validate composer.json and composer.lock
+        working-directory: process
+        run: composer validate
+      - name: Install dependencies
+        working-directory: process
+        run: composer install --prefer-dist --no-progress
+      - name: Run update
+        working-directory: process
+        run: composer run update-data -- --api-key=${{ secrets.API_KEY }}
+
+      - name: Commit sub-module
+        if: ${{ github.event_name != 'pull_request' }}
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add data/*
+          git commit -m "🗃 Update data"
+      - name: Push
+        uses: ad-m/github-push-action@master
+        if: ${{ github.event_name != 'pull_request' }}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}

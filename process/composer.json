@@ -1,0 +1,11 @@
+{
+    "name": "robinlinde/statistics",
+    "description": "",
+    "require": {
+        "php": "^7.2",
+        "guzzlehttp/guzzle": "^7.3"
+    },
+    "scripts": {
+        "update-data": "php scripts/data.php"
+    }
+}
