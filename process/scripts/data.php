@@ -37,6 +37,8 @@ foreach ($submodules as $submodule)
     file_put_contents($directory.'/'.str_replace('cities/', '', $submodule['path']).'.json', json_encode($history));
 }
 
+file_put_contents($directory.'/cities.json', get_cities());
+
 function get_submodules(): string
 {
     $client = new \GuzzleHttp\Client();
@@ -134,6 +136,22 @@ function get_history(string $owner, string $repo, string $api_key, string $api_e
     }
 
     return $statistics;
+}
+
+function get_cities(): string
+{
+    $client = new \GuzzleHttp\Client();
+    $response = $client->request(
+        'GET', 'https://raw.githubusercontent.com/EqualStreetNames/equalstreetnames/master/global/cities.json'
+    );
+
+    $status = $response->getStatusCode();
+
+    if ($status !== 200) {
+        throw new ErrorException($response->getReasonPhrase());
+    }
+
+    return (string) $response->getBody();
 }
 
 ?>
