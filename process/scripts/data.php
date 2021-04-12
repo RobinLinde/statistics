@@ -29,9 +29,9 @@ foreach ($submodules as $submodule)
 {
     $history = get_history($submodule['owner'], $submodule['repo'], $api_key, $api_endpoint);
 
-    if (!is_dir($directory.str_replace($submodule['repo'], '', $submodule['path'])))
+    if (!is_dir($directory.substr(str_replace('cities','', $submodule['path']),0, strpos(str_replace('cities','', $submodule['path']), '/',2))))
     {
-        mkdir($directory.str_replace('cities/', '', $submodule['path']));
+        mkdir($directory.substr(str_replace('cities','', $submodule['path']),0, strpos(str_replace('cities','', $submodule['path']), '/',2)));
     }
 
     file_put_contents($directory.'/'.str_replace('cities/', '', $submodule['path']).'.json', json_encode($history));
