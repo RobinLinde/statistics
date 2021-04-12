@@ -29,7 +29,7 @@ foreach ($submodules as $submodule)
 {
     $history = get_history($submodule['owner'], $submodule['repo'], $api_key, $api_endpoint);
 
-    file_put_contents($directory.'/'.str_replace('equalstreetnames-', '', $submodule['repo']).'.json', json_encode($history));
+    file_put_contents($directory.'/'.str_replace('cities/', '', $submodule['path']).'.json', json_encode($history));
 }
 
 function get_submodules(): string
