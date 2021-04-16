@@ -6,6 +6,11 @@
         "guzzlehttp/guzzle": "^7.3"
     },
     "scripts": {
-        "update-data": "php scripts/data.php"
+        "fetch": "php scripts/fetchData.php",
+        "convert": "php scripts/convert.php",
+        "update-data": [
+            "@fetch",
+            "@convert"
+        ]
     }
 }

@@ -11,7 +11,7 @@ chdir(__DIR__.'/../');
 require 'vendor/autoload.php';
 require 'scripts/functions/strpos_all.php';
 
-$directory = '../data';
+$directory = 'data';
 
 if (!file_exists($directory) || !is_dir($directory)) {
     mkdir($directory, 0777, true);
