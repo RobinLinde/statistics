@@ -35,7 +35,7 @@ foreach ($cities as $country)
         next($country);
 
         $outArray = array();
-        $outArray['labels'] = array_keys($statisticsJson);
+        $outArray['labels'] = array_reverse(array_keys($statisticsJson));
         $dataPoints = array();
 
         foreach($statisticsJson as $dataPoint)
@@ -49,7 +49,7 @@ foreach ($cities as $country)
                 $dataPoints[$currentType][] = $dataItem;
             }
         }
-        $outArray['datasets'] = array(
+        $outArray['datasets'] = array_reverse(array(
             array('label'=> 'Female (cis)', 'data'=> returnData($dataPoints['F'], $outArray['labels']), 'borderColor'=> '#800080', 'backgroundColor'=> '#800080'),
             array('label'=> 'Male (cis)', 'data'=> returnData($dataPoints['M'], $outArray['labels']), 'borderColor'=> '#C8C800', 'backgroundColor'=> '#C8C800'),
             array('label'=> 'Female (trans)', 'data'=> returnData($dataPoints['FX'], $outArray['labels']), 'borderColor'=> '#00A050', 'backgroundColor'=> '#00A050'),
@@ -59,7 +59,7 @@ foreach ($cities as $country)
             array('label'=> 'Multiple', 'data'=> returnData($dataPoints['+'], $outArray['labels']), 'borderColor'=> '#A46440', 'backgroundColor'=> '#A46440'),
             array('label'=> 'Unknown', 'data'=> returnData($dataPoints['?'], $outArray['labels']), 'borderColor'=> '#808080', 'backgroundColor'=> '#808080'),
             array('label'=> 'Not a person', 'data'=> returnData($dataPoints['-'], $outArray['labels']), 'borderColor'=> '#DDDDDD', 'backgroundColor'=> '#DDDDDD')
-        );
+        ));
 
         file_put_contents($outputDirectory.'/'.$currentCountry.'/'.$currentCity.'.json', json_encode($outArray));
         //print_r($outArray);
