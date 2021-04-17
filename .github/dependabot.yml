@@ -3,5 +3,10 @@ updates:
   - package-ecosystem: composer
     directory: "/process"
     schedule:
-      interval: monthly
+      interval: daily
+    open-pull-requests-limit: 10
+  - package-ecosystem: npm
+    directory: "/website"
+    schedule:
+      interval: daily
     open-pull-requests-limit: 10
