@@ -1,25 +1,28 @@
 {
   "name": "statistics",
   "version": "1.0.0",
-  "description": "[![wakatime](https://wakatime.com/badge/github/RobinLinde/statistics.svg)](https://wakatime.com/badge/github/RobinLinde/statistics)\r [![Update data](https://github.com/RobinLinde/statistics/actions/workflows/update-data.yml/badge.svg)](https://github.com/RobinLinde/statistics/actions/workflows/update-data.yml)",
-  "main": "index.js",
+  "description": "Statistics apps for EqualStreetNames",
+  "main": "index.html",
   "scripts": {
-    "build": "parcel build index.html",
-    "serve": "parcel index.html"
+    "build": "parcel build src/index.html",
+    "dev": "parcel src/index.html"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/RobinLinde/statistics.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Robin van der Linde",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/RobinLinde/statistics/issues"
   },
   "homepage": "https://github.com/RobinLinde/statistics#readme",
   "devDependencies": {
+    "cssnano": "^5.0.1",
+    "parcel-bundler": "1.12.5",
     "parcel-plugin-static-files-copy": "^2.6.0",
+    "postcss": "^8.2.10",
     "sass": "^1.32.10",
     "typescript": "^4.2.4"
   },
@@ -30,7 +33,6 @@
     "popper.js": "^1.16.1"
   },
   "staticFiles": {
-    "staticPath": "../data",
-    "watcherGlob": "**"
+    "staticPath": "../data"
   }
 }
