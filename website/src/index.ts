@@ -1,7 +1,6 @@
 "use strict";
 
 import Chart from 'chart.js/auto';
-import 'bootstrap/js/dist/collapse';
 
 (function () {
   window.onload = function () {
