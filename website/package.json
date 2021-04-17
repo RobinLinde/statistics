@@ -1,0 +1,36 @@
+{
+  "name": "statistics",
+  "version": "1.0.0",
+  "description": "[![wakatime](https://wakatime.com/badge/github/RobinLinde/statistics.svg)](https://wakatime.com/badge/github/RobinLinde/statistics)\r [![Update data](https://github.com/RobinLinde/statistics/actions/workflows/update-data.yml/badge.svg)](https://github.com/RobinLinde/statistics/actions/workflows/update-data.yml)",
+  "main": "index.js",
+  "scripts": {
+    "build": "parcel build index.html",
+    "serve": "parcel index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RobinLinde/statistics.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RobinLinde/statistics/issues"
+  },
+  "homepage": "https://github.com/RobinLinde/statistics#readme",
+  "devDependencies": {
+    "parcel-plugin-static-files-copy": "^2.6.0",
+    "sass": "^1.32.10",
+    "typescript": "^4.2.4"
+  },
+  "dependencies": {
+    "bootstrap": "^4.6.0",
+    "chart.js": "^3.1.1",
+    "jquery": "^3.6.0",
+    "popper.js": "^1.16.1"
+  },
+  "staticFiles": {
+    "staticPath": "../data",
+    "watcherGlob": "**"
+  }
+}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="stylesheet" href="index.scss" />
+    <title>EqualStreetNames statistics</title>
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">EqualStreetNames Statistics</a>
+          <form class="d-flex">
+            <select
+              id="city-dropdown"
+              class="form-select"
+              aria-label="Select a city"
+            ></select>
+          </form>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div id="chart">
+        <canvas id="statsChart"></canvas>
+      </div>
+    </main>
+    <script src="index.ts"></script>
+  </body>
+</html>
