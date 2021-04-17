@@ -5,7 +5,7 @@ on:
     branches: [master]
     paths:
       - ".github/workflows/deploy.yml"
-      - "website/*"
+      - "website/**"
   workflow_run:
     workflows: ["Update data"]
     branches: [master]
