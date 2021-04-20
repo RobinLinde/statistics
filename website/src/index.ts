@@ -1,6 +1,6 @@
 "use strict";
 
-import Chart from 'chart.js/auto';
+import Chart from '../node_modules/chart.js/auto';
 
 (function () {
   window.onload = function () {
@@ -12,20 +12,19 @@ import Chart from 'chart.js/auto';
         window.myChart1.destroy();
       }
     
-      console.log(city);
       if (city == 'Choose a city') {
         document.getElementById("noCity").style.display = "flex"; 
       }
       else {
         document.getElementById("noCity").style.display = "none";
-        const requestURL = city + ".json";
+        const requestURL = "https://raw.githubusercontent.com/RobinLinde/statistics/master/data/" + city + ".json";
         let request = new XMLHttpRequest();
         request.open("GET", requestURL);
         request.responseType = "json";
         request.send();
       
         request.onload = function () {
-          const requestData = request.response;
+          var requestData = request.response;
           var ctx = document.getElementById("statsChart").getContext("2d");
           window.myChart1 = new Chart (ctx, {
             type: "line",
@@ -49,7 +48,7 @@ import Chart from 'chart.js/auto';
     dropdown.add(defaultOption);
     dropdown.selectedIndex = 0;
 
-    const requestURL = "cities.json";
+    const requestURL = "https://raw.githubusercontent.com/RobinLinde/statistics/master/data/cities.json";
     let request = new XMLHttpRequest();
     request.open("GET", requestURL, true);
     request.responseType = "json";
