@@ -20,6 +20,9 @@ if (!file_exists($directory) || !is_dir($directory)) {
 if(!file_exists($directory.'/cities.json')) {
     throw new ErrorException('Missing cities.json');
 }
+if (!file_exists($outputDirectory) || !is_dir($outputDirectory)) {
+    mkdir($outputDirectory);
+}
 
 $cities = file_get_contents($directory.'/cities.json');
 $cities = json_decode($cities, true);
@@ -60,6 +63,11 @@ foreach ($cities as $country)
             array('label'=> 'Unknown', 'data'=> array_reverse(returnData($dataPoints['?'], $outArray['labels'])), 'borderColor'=> '#808080', 'backgroundColor'=> '#808080'),
             array('label'=> 'Not a person', 'data'=> array_reverse(returnData($dataPoints['-'], $outArray['labels'])), 'borderColor'=> '#DDDDDD', 'backgroundColor'=> '#DDDDDD')
         );
+
+        if (!file_exists($outputDirectory.'/'.$currentCountry) || !is_dir($outputDirectory.'/'.$currentCountry))
+        {
+            mkdir($outputDirectory.'/'.$currentCountry);
+        }
 
         file_put_contents($outputDirectory.'/'.$currentCountry.'/'.$currentCity.'.json', json_encode($outArray));
         //print_r($outArray);
