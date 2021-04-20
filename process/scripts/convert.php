@@ -25,6 +25,7 @@ if (!file_exists($outputDirectory) || !is_dir($outputDirectory)) {
 }
 
 $cities = file_get_contents($directory.'/cities.json');
+copy($directory.'/cities.json', $outputDirectory.'/cities.json');
 $cities = json_decode($cities, true);
 
 foreach ($cities as $country)
