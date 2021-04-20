@@ -12,28 +12,31 @@ import Chart from 'chart.js/auto';
         window.myChart1.destroy();
       }
     
-      const requestURL = city + ".json";
-      let request = new XMLHttpRequest();
-      request.open("GET", requestURL);
-      request.responseType = "json";
-      request.send();
-    
-      request.onload = function () {
-        const requestData = request.response;
-        var ctx = document.getElementById("statsChart").getContext("2d");
-        window.myChart1 = new Chart (ctx, {
-          type: "line",
-          data: requestData,
-          options: {
-            responsive: true,
-            scales: {
-              y: {
-                beginAtZero: true,
+
+      if (city != null) {
+        const requestURL = city + ".json";
+        let request = new XMLHttpRequest();
+        request.open("GET", requestURL);
+        request.responseType = "json";
+        request.send();
+      
+        request.onload = function () {
+          const requestData = request.response;
+          var ctx = document.getElementById("statsChart").getContext("2d");
+          window.myChart1 = new Chart (ctx, {
+            type: "line",
+            data: requestData,
+            options: {
+              responsive: true,
+              scales: {
+                y: {
+                  beginAtZero: true,
+                },
               },
             },
-          },
-        });
-      };
+          });
+        };
+      }
     }
 
     let defaultOption = document.createElement("option");
