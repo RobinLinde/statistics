@@ -71,7 +71,6 @@ foreach ($cities as $country)
         }
 
         file_put_contents($outputDirectory.'/'.$currentCountry.'/'.$currentCity.'.json', json_encode($outArray));
-        //print_r($outArray);
 
     }
     next($cities);
