@@ -12,8 +12,12 @@ import Chart from 'chart.js/auto';
         window.myChart1.destroy();
       }
     
-
-      if (city != null) {
+      console.log(city);
+      if (city == 'Choose a city') {
+        document.getElementById("noCity").style.display = "flex"; 
+      }
+      else {
+        document.getElementById("noCity").style.display = "none";
         const requestURL = city + ".json";
         let request = new XMLHttpRequest();
         request.open("GET", requestURL);
