@@ -35,41 +35,50 @@ foreach ($cities as $country)
     foreach($country as $city)
     {
         $currentCity = key($country);
-        $statisticsJson = json_decode(file_get_contents($directory.'/'.$currentCountry.'/'.$currentCity.'.json'),true);
+        $statisticsJson = json_decode(file_get_contents($directory.'/'.$currentCountry.'/'.$currentCity.'-statistics.json'),true);
+        $sourcesJson = json_decode(file_get_contents($directory.'/'.$currentCountry.'/'.$currentCity.'-sources.json'), true);
         next($country);
 
-        $outArray = array();
-        $outArray['labels'] = array_reverse(array_keys($statisticsJson));
-        $dataPoints = array();
+        $statisticsArray = array();
 
         foreach($statisticsJson as $dataPoint)
         {
+            $pointArray = array();
             $currentPoint = key($statisticsJson);
+            $pointArray['x'] = $currentPoint;
             next($statisticsJson);
             foreach($dataPoint as $dataItem)
             {
                 $currentType = key($dataPoint);
                 next($dataPoint);
-                $dataPoints[$currentType][] = $dataItem;
+                $pointArray[$currentType] = $dataItem;
             }
+            $statisticsArray[] = $pointArray;
         }
-        $outArray['datasets'] = array(
-            array('label'=> 'Female (cis)', 'data'=> array_reverse(returnData($dataPoints['F'], $outArray['labels'])), 'borderColor'=> '#800080', 'backgroundColor'=> '#800080'),
-            array('label'=> 'Male (cis)', 'data'=> array_reverse(returnData($dataPoints['M'], $outArray['labels'])), 'borderColor'=> '#C8C800', 'backgroundColor'=> '#C8C800'),
-            array('label'=> 'Female (trans)', 'data'=> array_reverse(returnData($dataPoints['FX'], $outArray['labels'])), 'borderColor'=> '#00A050', 'backgroundColor'=> '#00A050'),
-            array('label'=> 'Male (trans)', 'data'=> array_reverse(returnData($dataPoints['MX'], $outArray['labels'])), 'borderColor'=> '#00A050', 'backgroundColor'=> '#00A050'),
-            array('label'=> 'Intersex', 'data'=> array_reverse(returnData($dataPoints['X'], $outArray['labels'])), 'borderColor'=> '#00A050', 'backgroundColor'=> '#00A050'),
-            array('label'=> 'Non-binary', 'data'=> array_reverse(returnData($dataPoints['NB'], $outArray['labels'])), 'borderColor'=> '#808080', 'backgroundColor'=> '#808080'),
-            array('label'=> 'Multiple', 'data'=> array_reverse(returnData($dataPoints['+'], $outArray['labels'])), 'borderColor'=> '#A46440', 'backgroundColor'=> '#A46440'),
-            array('label'=> 'Unknown', 'data'=> array_reverse(returnData($dataPoints['?'], $outArray['labels'])), 'borderColor'=> '#808080', 'backgroundColor'=> '#808080'),
-            array('label'=> 'Not a person', 'data'=> array_reverse(returnData($dataPoints['-'], $outArray['labels'])), 'borderColor'=> '#DDDDDD', 'backgroundColor'=> '#DDDDDD')
-        );
+
+        $sourcesArray = array();
+
+        foreach($sourcesJson as $dataPoint)
+        {
+            $pointArray = array();
+            $currentPoint = key($sourcesJson);
+            $pointArray['x'] = $currentPoint;
+            next($sourcesJson);
+            foreach($dataPoint as $dataItem)
+            {
+                $currentType = key($dataPoint);
+                next($dataPoint);
+                $pointArray[$currentType] = $dataItem;
+            }
+            $sourcesArray[] = $pointArray;
+        }
 
         if (!file_exists($outputDirectory.'/'.$currentCountry) || !is_dir($outputDirectory.'/'.$currentCountry))
         {
             mkdir($outputDirectory.'/'.$currentCountry);
         }
 
+        $outArray = array('statistics' => $statisticsArray, 'sources' => $sourcesArray);
         file_put_contents($outputDirectory.'/'.$currentCountry.'/'.$currentCity.'.json', json_encode($outArray));
 
     }

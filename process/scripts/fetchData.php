@@ -27,14 +27,17 @@ $submodules = parse_submodules($submodules_raw);
 
 foreach ($submodules as $submodule)
 {
-    $history = get_history($submodule['owner'], $submodule['repo'], $api_key, $api_endpoint);
+    $statistics = get_history($submodule['owner'], $submodule['repo'], '/data/statistics.json', $api_key, $api_endpoint);
+    $sources = get_history($submodule['owner'], $submodule['repo'], '/data/sources.json', $api_key, $api_endpoint);
 
     if (!is_dir($directory.substr(str_replace('cities','', $submodule['path']),0, strpos(str_replace('cities','', $submodule['path']), '/',2))))
     {
         mkdir($directory.substr(str_replace('cities','', $submodule['path']),0, strpos(str_replace('cities','', $submodule['path']), '/',2)));
     }
 
-    file_put_contents($directory.'/'.str_replace('cities/', '', $submodule['path']).'.json', json_encode($history));
+    file_put_contents($directory.'/'.str_replace('cities/', '', $submodule['path']).'-statistics.json', json_encode($statistics));
+    file_put_contents($directory.'/'.str_replace('cities/', '', $submodule['path']).'-sources.json', json_encode($sources));
+    
 }
 
 file_put_contents($directory.'/cities.json', get_cities());
@@ -85,11 +88,11 @@ function parse_submodules(string $submodules): array
 
 }
 
-function get_history(string $owner, string $repo, string $api_key, string $api_endpoint)
+function get_history(string $owner, string $repo, string $file, string $api_key, string $api_endpoint)
 {
     $client = new \GuzzleHttp\Client();
     $response = $client->request(
-        'GET', $api_endpoint.'repos/'.$owner.'/'.$repo.'/commits?path=/data/statistics.json',
+        'GET', $api_endpoint.'repos/'.$owner.'/'.$repo.'/commits?path='.$file,
         ['headers' => [
             'Accept' => 'application/vnd.github.v3+json',
             'Authorization' => 'token '.$api_key
@@ -110,7 +113,7 @@ function get_history(string $owner, string $repo, string $api_key, string $api_e
     foreach ($commits as $commit)
     {
         $response = $client->request(
-            'GET', $api_endpoint.'repos/'.$owner.'/'.$repo.'/contents/data/statistics.json?ref='.$commit['sha'],
+            'GET', $api_endpoint.'repos/'.$owner.'/'.$repo.'/contents/'.$file.'?ref='.$commit['sha'],
                 ['headers' => [
                     'Accept' => 'application/vnd.github.v3+json',
                     'Authorization' => 'token '.$api_key
