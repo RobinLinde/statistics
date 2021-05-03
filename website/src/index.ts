@@ -133,6 +133,16 @@ import 'chartjs-adapter-date-fns';
                   }
                 },
                 {
+                  label: "CSV",
+                  data: requestData['sources'],
+                  borderDash: [5, 5],
+                  backgroundColor: '#1000FF',
+                  borderColor: '#1000FF',
+                  parsing: {
+                    yAxisKey: 'csv'
+                  }
+                },
+                {
                   label: "Event",
                   data: requestData['sources'],
                   borderDash: [5, 5],
