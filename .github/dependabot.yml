@@ -4,9 +4,13 @@ updates:
     directory: "/process"
     schedule:
       interval: daily
+    commit-message:
+      prefix: "⬆️"
     open-pull-requests-limit: 10
   - package-ecosystem: npm
     directory: "/website"
     schedule:
       interval: daily
+    commit-message:
+      prefix: "⬆️"
     open-pull-requests-limit: 10
