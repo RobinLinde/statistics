@@ -85,21 +85,4 @@ foreach ($cities as $country)
     next($cities);
 }
 
-function returnData($points, $labels)
-{
-    $count = count($labels);
-    $countPoints = count($points);
-    
-    if ($count == $countPoints) return $points;
-    else
-    {
-        $newArray = array();
-        $diff = $count - $countPoints;
-        for ($i = 1; $i <= $diff; $i++) {
-            $newArray[]='';
-        }
-        return array_merge($newArray, $points);
-    }
-}
-
 ?>
