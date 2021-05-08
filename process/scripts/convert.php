@@ -79,7 +79,7 @@ foreach ($cities as $country)
         }
 
         $outArray = array('statistics' => $statisticsArray, 'sources' => $sourcesArray);
-        file_put_contents($outputDirectory.'/'.$currentCountry.'/'.$currentCity.'.json', json_encode($outArray));
+        file_put_contents($outputDirectory.'/'.$currentCountry.'/'.$currentCity.'.json', json_encode($outArray, JSON_PRETTY_PRINT));
 
     }
     next($cities);
