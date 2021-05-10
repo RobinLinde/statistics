@@ -1,6 +1,7 @@
 {
   "name": "statistics",
   "scripts": {
+    "lint": "eslint ./src/index.ts",
     "start": "parcel serve ./src/index.html",
     "build": "parcel build ./src/index.html"
   },
@@ -12,6 +13,8 @@
   },
   "devDependencies": {
     "@parcel/transformer-sass": "2.0.0-beta.2",
+    "@typescript-eslint/eslint-plugin": "4.22.1",
+    "eslint": "7.26.0",
     "parcel": "2.0.0-beta.2"
   }
 }

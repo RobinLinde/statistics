@@ -5,10 +5,10 @@ import 'chartjs-adapter-date-fns';
 
 (function () {
   window.onload = function () {
-    const dropdown = document.getElementById("city-dropdown");
+    const dropdown = <HTMLSelectElement> document.getElementById("city-dropdown");
 
     dropdown.onchange = (ev: Event) => {
-      var city = (<HTMLInputElement>ev.srcElement).value; 
+      const city = (<HTMLInputElement>ev.srcElement).value; 
       if (window.myChart1 != null) {
         window.myChart1.destroy();
       }
@@ -19,14 +19,14 @@ import 'chartjs-adapter-date-fns';
       else {
         document.getElementById("noCity").style.display = "none";
         const requestURL = "https://raw.githubusercontent.com/RobinLinde/statistics/master/data/" + city + ".json";
-        let request = new XMLHttpRequest();
+        const request = new XMLHttpRequest();
         request.open("GET", requestURL);
         request.responseType = "json";
         request.send();
       
         request.onload = function () {
-          var requestData = request.response;
-          var ctx = document.getElementById("statsChart").getContext("2d");
+          const requestData = request.response;
+          const ctx = document.getElementById("statsChart").getContext("2d");
           window.myChart1 = new Chart (ctx, {
             type: "line",
             data: {
@@ -180,14 +180,14 @@ import 'chartjs-adapter-date-fns';
       }
     }
 
-    let defaultOption = document.createElement("option");
+    const defaultOption = document.createElement("option");
     defaultOption.text = "Choose a city";
 
     dropdown.add(defaultOption);
     dropdown.selectedIndex = 0;
 
     const requestURL = "https://raw.githubusercontent.com/RobinLinde/statistics/master/data/cities.json";
-    let request = new XMLHttpRequest();
+    const request = new XMLHttpRequest();
     request.open("GET", requestURL, true);
     request.responseType = "json";
     request.send();
@@ -198,12 +198,12 @@ import 'chartjs-adapter-date-fns';
 
       let option;
 
-      for (var i = 0; i < countries.length; i++) {
-        var currentCountry = countries[i];
-        var cities = Object.keys(requestData[currentCountry]);
+      for (let i = 0; i < countries.length; i++) {
+        const currentCountry = countries[i];
+        const cities = Object.keys(requestData[currentCountry]);
 
-        for (var j = 0; j < cities.length; j++) {
-          var currentCity = cities[j];
+        for (let j = 0; j < cities.length; j++) {
+          const currentCity = cities[j];
 
           option = document.createElement("option");
           option.text = requestData[currentCountry][currentCity]["name"];
