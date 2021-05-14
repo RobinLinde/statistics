@@ -27,8 +27,36 @@ $submodules = parse_submodules($submodules_raw);
 
 foreach ($submodules as $submodule)
 {
-    $statistics = get_history($submodule['owner'], $submodule['repo'], '/data/statistics.json', $api_key, $api_endpoint);
-    $sources = get_history($submodule['owner'], $submodule['repo'], '/data/sources.json', $api_key, $api_endpoint);
+    $statisticsFile = get_history($submodule['owner'], $submodule['repo'], '/data/statistics.json', $api_key, $api_endpoint);
+    $sourcesFile = get_history($submodule['owner'], $submodule['repo'], '/data/sources.json', $api_key, $api_endpoint);
+    $metadataFile = get_history($submodule['owner'], $submodule['repo'], '/data/metadata.json', $api_key, $api_endpoint);
+
+    //print_r($metadataFile);
+
+    if (!empty($metadataFile)){
+        $statisticsArray = array();
+        $sourcesArray = array();
+
+        foreach($metadataFile as $p=>$d){
+            $statisticsArray[$p] = $d['genders'];
+            $sourcesArray[$p] = $d['sources'];
+        }
+
+        if(!empty($statisticsFile) or !empty($sourcesFile)){
+            $statistics = array_merge($statisticsFile, $statisticsArray);
+            $sources = array_merge($sourcesFile, $sourcesArray);
+            ksort($statistics);
+            ksort($sources);
+        }
+        else {
+            $statistics = $statisticsArray;
+            $sources = $sourcesArray;
+        }
+    }
+    else {
+        $statistics = $statisticsFile;
+        $sources = $sourcesFile;
+    }
 
     if (!is_dir($directory.substr(str_replace('cities','', $submodule['path']),0, strpos(str_replace('cities','', $submodule['path']), '/',2))))
     {
