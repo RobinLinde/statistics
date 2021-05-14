@@ -7,6 +7,9 @@ updates:
     commit-message:
       prefix: "⬆️"
     open-pull-requests-limit: 10
+    assignees:
+      - "RobinLinde"
+
   - package-ecosystem: npm
     directory: "/website"
     schedule:
@@ -14,3 +17,5 @@ updates:
     commit-message:
       prefix: "⬆️"
     open-pull-requests-limit: 10
+    assignees:
+      - "RobinLinde"
