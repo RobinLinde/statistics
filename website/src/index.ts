@@ -1,180 +1,198 @@
 "use strict";
 
-import Chart from '../node_modules/chart.js/auto';
-import 'chartjs-adapter-date-fns';
+import Chart from "../node_modules/chart.js/auto";
+import "chartjs-adapter-date-fns";
+
+function setOption(selectElement: HTMLSelectElement, value) {
+  var options = selectElement.options;
+  for (var i = 0, optionsLength = options.length; i < optionsLength; i++) {
+    if (options[i].value == value) {
+      selectElement.selectedIndex = i;
+      return true;
+    }
+  }
+  return false;
+}
 
 (function () {
   window.onload = function () {
-    const dropdown = <HTMLSelectElement> document.getElementById("city-dropdown");
+    const dropdown = <HTMLSelectElement>(
+      document.getElementById("city-dropdown")
+    );
 
-    dropdown.onchange = (ev: Event) => {
-      const city = (<HTMLInputElement>ev.srcElement).value; 
+    dropdown.onchange = function () {
+      updateChart(dropdown.value);
+    };
+
+    function updateChart(city) {
       if (window.myChart1 != null) {
         window.myChart1.destroy();
       }
-    
-      if (city == 'Choose a city') {
-        document.getElementById("noCity").style.display = "flex"; 
-      }
-      else {
+
+      if (city == "Choose a city") {
+        document.getElementById("noCity").style.display = "flex";
+      } else {
         document.getElementById("noCity").style.display = "none";
-        const requestURL = "https://raw.githubusercontent.com/RobinLinde/statistics/master/data/" + city + ".json";
+        const requestURL =
+          "https://raw.githubusercontent.com/RobinLinde/statistics/master/data/" +
+          city +
+          ".json";
         const request = new XMLHttpRequest();
         request.open("GET", requestURL);
         request.responseType = "json";
         request.send();
-      
+
         request.onload = function () {
           const requestData = request.response;
           const ctx = document.getElementById("statsChart").getContext("2d");
-          window.myChart1 = new Chart (ctx, {
+          window.myChart1 = new Chart(ctx, {
             type: "line",
             data: {
               datasets: [
                 {
                   label: "Female (cis)",
-                  data: requestData['statistics'],
-                  backgroundColor: '#800080',
-                  borderColor: '#800080',
+                  data: requestData["statistics"],
+                  backgroundColor: "#800080",
+                  borderColor: "#800080",
                   parsing: {
-                    yAxisKey: 'F'
-                  }
+                    yAxisKey: "F",
+                  },
                 },
                 {
                   label: "Male (cis)",
-                  data: requestData['statistics'],
-                  backgroundColor: '#C8C800',
-                  borderColor: '#C8C800',
+                  data: requestData["statistics"],
+                  backgroundColor: "#C8C800",
+                  borderColor: "#C8C800",
                   parsing: {
-                    yAxisKey: 'M'
-                  }
+                    yAxisKey: "M",
+                  },
                 },
                 {
                   label: "Female (trans)",
-                  data: requestData['statistics'],
-                  backgroundColor: '#00A050',
-                  borderColor: '#00A050',
+                  data: requestData["statistics"],
+                  backgroundColor: "#00A050",
+                  borderColor: "#00A050",
                   parsing: {
-                    yAxisKey: 'FX'
-                  }
+                    yAxisKey: "FX",
+                  },
                 },
                 {
                   label: "Male (trans)",
-                  data: requestData['statistics'],
-                  backgroundColor: '#00A050',
-                  borderColor: '#00A050',
+                  data: requestData["statistics"],
+                  backgroundColor: "#00A050",
+                  borderColor: "#00A050",
                   parsing: {
-                    yAxisKey: 'MX'
-                  }
+                    yAxisKey: "MX",
+                  },
                 },
                 {
                   label: "Intersex",
-                  data: requestData['statistics'],
-                  backgroundColor: '#00A050',
-                  borderColor: '#00A050',
+                  data: requestData["statistics"],
+                  backgroundColor: "#00A050",
+                  borderColor: "#00A050",
                   parsing: {
-                    yAxisKey: 'X'
-                  }
+                    yAxisKey: "X",
+                  },
                 },
                 {
                   label: "Non-binary",
-                  data: requestData['statistics'],
-                  backgroundColor: '#808080',
-                  borderColor: '#808080',
+                  data: requestData["statistics"],
+                  backgroundColor: "#808080",
+                  borderColor: "#808080",
                   parsing: {
-                    yAxisKey: 'NB'
-                  }
+                    yAxisKey: "NB",
+                  },
                 },
                 {
                   label: "Multiple",
-                  data: requestData['statistics'],
-                  backgroundColor: '#A46440',
-                  borderColor: '#A46440',
+                  data: requestData["statistics"],
+                  backgroundColor: "#A46440",
+                  borderColor: "#A46440",
                   parsing: {
-                    yAxisKey: '+'
-                  }
+                    yAxisKey: "+",
+                  },
                 },
                 {
                   label: "Unknown",
-                  data: requestData['statistics'],
-                  backgroundColor: '#808080',
-                  borderColor: '#808080',
+                  data: requestData["statistics"],
+                  backgroundColor: "#808080",
+                  borderColor: "#808080",
                   parsing: {
-                    yAxisKey: '?'
-                  }
+                    yAxisKey: "?",
+                  },
                 },
                 {
                   label: "Not a person",
-                  data: requestData['statistics'],
-                  backgroundColor: '#DDDDDD',
-                  borderColor: '#DDDDDD',
+                  data: requestData["statistics"],
+                  backgroundColor: "#DDDDDD",
+                  borderColor: "#DDDDDD",
                   parsing: {
-                    yAxisKey: '-'
-                  }
+                    yAxisKey: "-",
+                  },
                 },
                 {
                   label: "Wikidata",
-                  data: requestData['sources'],
+                  data: requestData["sources"],
                   borderDash: [5, 5],
-                  backgroundColor: '#990000',
-                  borderColor: '#990000',
+                  backgroundColor: "#990000",
+                  borderColor: "#990000",
                   parsing: {
-                    yAxisKey: 'wikidata'
-                  }
+                    yAxisKey: "wikidata",
+                  },
                 },
                 {
                   label: "From config file",
-                  data: requestData['sources'],
+                  data: requestData["sources"],
                   borderDash: [5, 5],
-                  backgroundColor: '#1000FF',
-                  borderColor: '#1000FF',
+                  backgroundColor: "#1000FF",
+                  borderColor: "#1000FF",
                   parsing: {
-                    yAxisKey: 'config'
-                  }
+                    yAxisKey: "config",
+                  },
                 },
                 {
                   label: "CSV",
-                  data: requestData['sources'],
+                  data: requestData["sources"],
                   borderDash: [5, 5],
-                  backgroundColor: '#1000FF',
-                  borderColor: '#1000FF',
+                  backgroundColor: "#1000FF",
+                  borderColor: "#1000FF",
                   parsing: {
-                    yAxisKey: 'csv'
-                  }
+                    yAxisKey: "csv",
+                  },
                 },
                 {
                   label: "Event",
-                  data: requestData['sources'],
+                  data: requestData["sources"],
                   borderDash: [5, 5],
-                  backgroundColor: '#00A1FF',
-                  borderColor: '#00A1FF',
+                  backgroundColor: "#00A1FF",
+                  borderColor: "#00A1FF",
                   parsing: {
-                    yAxisKey: 'event'
-                  }
+                    yAxisKey: "event",
+                  },
                 },
                 {
                   label: "Not mapped",
-                  data: requestData['sources'],
+                  data: requestData["sources"],
                   borderDash: [5, 5],
-                  backgroundColor: '#DDDDDD',
-                  borderColor: '#DDDDDD',
+                  backgroundColor: "#DDDDDD",
+                  borderColor: "#DDDDDD",
                   parsing: {
-                    yAxisKey: '-'
-                  }
-                }
-              ]
+                    yAxisKey: "-",
+                  },
+                },
+              ],
             },
             options: {
               responsive: true,
               scales: {
                 x: {
-                  type: 'time'
+                  type: "time",
                 },
                 y: {
-                  beginAtZero: true
+                  beginAtZero: true,
                 },
               },
-            }
+            },
           });
         };
       }
@@ -186,7 +204,8 @@ import 'chartjs-adapter-date-fns';
     dropdown.add(defaultOption);
     dropdown.selectedIndex = 0;
 
-    const requestURL = "https://raw.githubusercontent.com/RobinLinde/statistics/master/data/cities.json";
+    const requestURL =
+      "https://raw.githubusercontent.com/RobinLinde/statistics/master/data/cities.json";
     const request = new XMLHttpRequest();
     request.open("GET", requestURL, true);
     request.responseType = "json";
@@ -210,6 +229,14 @@ import 'chartjs-adapter-date-fns';
           option.value = currentCountry + "/" + currentCity;
           dropdown.add(option);
         }
+      }
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const cityFromUrl = urlParams.get("city");
+  
+      if(cityFromUrl){
+        updateChart(cityFromUrl)
+        setOption(dropdown, cityFromUrl)
       }
     };
   };
