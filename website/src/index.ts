@@ -4,8 +4,8 @@ import Chart from "../node_modules/chart.js/auto";
 import "chartjs-adapter-date-fns";
 
 function setOption(selectElement: HTMLSelectElement, value) {
-  var options = selectElement.options;
-  for (var i = 0, optionsLength = options.length; i < optionsLength; i++) {
+  const options = selectElement.options;
+  for (let i = 0, optionsLength = options.length; i < optionsLength; i++) {
     if (options[i].value == value) {
       selectElement.selectedIndex = i;
       return true;
