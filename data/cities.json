@@ -37,6 +37,12 @@
       "url": "https://nivelles.equalstreetnames.be/"
     }
   },
+  "france": {
+    "saint-brieuc": {
+      "name": "🇫🇷 Saint-Brieuc, France",
+      "url": "https://saint-brieuc.equalstreetnames.eu/"
+    }
+  },
   "germany": {
     "berlin": {
       "name": "🇩🇪 Berlin, Germany",
@@ -45,6 +51,10 @@
     "brandenburg-an-der-havel": {
       "name": "🇩🇪 Brandenburg an der Havel, Germany",
       "url": "https://brandenburg-an-der-havel.equalstreetnames.eu/"
+    },
+    "dresden": {
+      "name": "🇩🇪 Dresden, Germany",
+      "url": "https://dresden.equalstreetnames.eu/"
     },
     "freising": {
       "name": "🇩🇪 Freising, Germany",
@@ -61,6 +71,18 @@
     "munich": {
       "name": "🇩🇪 Munich, Germany",
       "url": "https://munich.equalstreetnames.eu/"
+    }
+  },
+  "italy": {
+    "bolzano": {
+      "name": "🇮🇹 Bolzano, Italy",
+      "url": "https://bolzano.equalstreetnames.eu/"
+    }
+  },
+  "luxembourg": {
+    "luxembourg": {
+      "name": "🇱🇺 Luxembourg, Luxembourg",
+      "url": "https://luxembourg.equalstreetnames.eu/"
     }
   },
   "netherlands": {
@@ -86,7 +108,7 @@
   "spain": {
     "madrid": {
       "name": "🇪🇸 Madrid, Spain",
-      "url": ""
+      "url": "https://madrid.equalstreetnames.eu/"
     }
   },
   "switzerland": {
