@@ -1,4 +1,16 @@
 {
+  "austria": {
+    "vienna": {
+      "name": "🇦🇹 Vienna, Austria",
+      "url": "https://vienna.equalstreetnames.eu/"
+    }
+  },
+  "belarus": {
+    "minsk": {
+      "name": "🇧🇾 Minsk, Belarus",
+      "url": "https://minsk.equalstreetnames.org/"
+    }
+  },
   "belgium": {
     "brussels": {
       "name": "🇧🇪 Brussels, Belgium",
@@ -99,6 +111,12 @@
       "url": "https://leiden.equalstreetnames.eu/"
     }
   },
+  "philippines": {
+    "sanpablo": {
+      "name": "🇵🇭 San Pablo, Philippines",
+      "url": "https://sanpablo.equalstreetnames.org/"
+    }
+  },
   "serbia": {
     "belgrade": {
       "name": "🇷🇸 Belgrade, Serbia",
@@ -129,10 +147,16 @@
       "url": "https://zurich.equalstreetnames.eu/"
     }
   },
+  "united-kingdom": {
+    "chester-le-street": {
+      "name": "🇬🇧 Chester-le-Street, United Kingdom",
+      "url": "https://chester-le-street.equalstreetnames.org/"
+    }
+  },
   "usa": {
     "sanfrancisco": {
       "name": "🇺🇸 San Francisco, USA",
-      "url": ""
+      "url": "https://sanfrancisco.equalstreetnames.org/"
     }
   }
 }
