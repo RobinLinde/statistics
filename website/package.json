@@ -6,7 +6,7 @@
     "build": "parcel build ./src/index.html"
   },
   "dependencies": {
-    "bootstrap": "5.1.0",
+    "bootstrap": "5.1.1",
     "chart.js": "3.5.1",
     "chartjs-adapter-date-fns": "2.0.0",
     "date-fns": "2.23.0"
