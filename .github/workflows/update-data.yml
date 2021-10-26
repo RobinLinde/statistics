@@ -1,9 +1,9 @@
 name: Update data
 
 on:
-  # Run every Monday till Friday at 5:00 UTC
+  # Run every second of the month at 5:00 UTC
   schedule:
-    - cron: "0 6 * * 1-5"
+    - cron: "0 5 1 * *"
   push:
     paths:
       - ".github/workflows/update-data.yml"
@@ -36,7 +36,7 @@ jobs:
 
       - name: Run update
         working-directory: process
-        run: composer run update-data -- --api-key=${{ secrets.API_KEY }}
+        run: composer run update-data -- -a=${{ secrets.API_KEY }}
 
       - name: Commit changes
         if: ${{ github.event_name != 'pull_request' }}
