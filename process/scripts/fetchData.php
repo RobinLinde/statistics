@@ -17,8 +17,8 @@ if (!file_exists($directory) || !is_dir($directory)) {
     mkdir($directory, 0777, true);
 }
 
-$options = getopt('a:', ['api-key:']);
-$api_key = $options['a'] ?? $options['api-key'];
+$options = getopt('a:');
+$api_key = $options['a'];
 $api_endpoint = 'https://api.github.com/';
 
 $submodules_raw = get_submodules();

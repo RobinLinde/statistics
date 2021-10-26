@@ -36,7 +36,7 @@ jobs:
 
       - name: Run update
         working-directory: process
-        run: composer run update-data -- --a${{ secrets.API_KEY }}
+        run: composer run update-data -- --a=${{ secrets.API_KEY }}
 
       - name: Commit changes
         if: ${{ github.event_name != 'pull_request' }}
