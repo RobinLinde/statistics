@@ -30,8 +30,7 @@ foreach ($submodules as $submodule)
     $statisticsFile = get_history($submodule['owner'], $submodule['repo'], '/data/statistics.json', $api_key, $api_endpoint);
     $sourcesFile = get_history($submodule['owner'], $submodule['repo'], '/data/sources.json', $api_key, $api_endpoint);
     $metadataFile = get_history($submodule['owner'], $submodule['repo'], '/data/metadata.json', $api_key, $api_endpoint);
-
-    //print_r($metadataFile);
+    echo "Got data for ".$submodule['repo']."\n";
 
     if (!empty($metadataFile)){
         $statisticsArray = array();
