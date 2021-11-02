@@ -28,6 +28,9 @@ function setOption(selectElement: HTMLSelectElement, value) {
       if (window.myChart1 != null) {
         window.myChart1.destroy();
       }
+      if (window.myChart2 != null) {
+        window.myChart2.destroy();
+      }
 
       if (city == "Choose a city") {
         document.getElementById("noCity").style.display = "flex";
@@ -193,6 +196,38 @@ function setOption(selectElement: HTMLSelectElement, value) {
                 },
               },
             },
+          });
+          const arrayIndex = requestData["sources"].length -1;
+          const unmapped = requestData["sources"][arrayIndex]["-"];
+          let mapped = requestData["sources"][arrayIndex]["wikidata"];
+          if(requestData["sources"][arrayIndex]["csv"]) {mapped += requestData["sources"][arrayIndex]["csv"]}
+          if(requestData["sources"][arrayIndex]["config"]) {mapped += requestData["sources"][arrayIndex]["config"]}
+          if(requestData["sources"][arrayIndex]["event"]) {mapped += requestData["sources"][arrayIndex]["event"]}
+          const total = unmapped + mapped;
+          console.log(mapped);
+          console.log(total);
+
+
+          const ctx2 = document.getElementById("completionChart").getContext("2d");
+          window.myChart2 = new Chart(ctx2, {
+            "type": "doughnut",
+            
+            data: {
+              labels: [
+                "Etymology known",
+                "Etymology unknown"
+              ],
+              datasets: [
+                {
+                  data: [mapped/total*100, unmapped/total*100],
+                  backgroundColor: ["green", "red"],
+                },
+              ]
+            },
+            options: {
+              circumference: 180,
+              rotation: -90,
+            }
           });
         };
       }
