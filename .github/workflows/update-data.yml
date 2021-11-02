@@ -3,7 +3,7 @@ name: Update data
 on:
   # Run every second of the month at 5:00 UTC
   schedule:
-    - cron: "0 5 1 * *"
+    - cron: "0 5 2 * *"
   push:
     paths:
       - ".github/workflows/update-data.yml"
