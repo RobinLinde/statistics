@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "@parcel/transformer-sass": "2.0.1",
-    "@typescript-eslint/eslint-plugin": "5.7.0",
+    "@typescript-eslint/eslint-plugin": "5.8.0",
     "eslint": "8.5.0",
     "parcel": "2.0.1"
   }
