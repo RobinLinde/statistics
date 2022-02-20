@@ -160,7 +160,7 @@ function get_history(string $owner, string $repo, string $file, string $api_key,
             $data = (string) $response->getBody();
             $data = json_decode($data, true);
 
-            $statistics[$commit['commit']['committer']['date']]=json_decode(base64_decode($data['content']), true);
+            $statistics[strtotime($commit['commit']['committer']['date'])]=json_decode(base64_decode($data['content']), true);
         }
 
     }
