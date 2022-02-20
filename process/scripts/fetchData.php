@@ -42,10 +42,8 @@ foreach ($submodules as $submodule)
         }
 
         if(!empty($statisticsFile) or !empty($sourcesFile)){
-            $statistics = array_merge($statisticsFile, $statisticsArray);
-            $sources = array_merge($sourcesFile, $sourcesArray);
-            ksort($statistics);
-            ksort($sources);
+            $statistics = $statisticsFile + $statisticsArray;
+            $sources = $sourcesFile + $sourcesArray;
         }
         else {
             $statistics = $statisticsArray;
