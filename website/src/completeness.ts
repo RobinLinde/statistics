@@ -36,7 +36,7 @@ request.onload = function () {
 
       cityRequest.onload = function () {
         const cityData = cityRequest.response;
-        const unmapped = cityData["statistics"][0]["-"];
+        const unmapped = cityData["sources"][0]["-"];
         let mapped = cityData["sources"][0]["wikidata"];
         if (cityData["sources"][0]["csv"]) {
           mapped += cityData["sources"][0]["csv"];
@@ -47,7 +47,6 @@ request.onload = function () {
         if (cityData["sources"][0]["event"]) {
           mapped += cityData["sources"][0]["event"];
         }
-        console.log(cityData);
         const total = mapped + unmapped;
         chartData[requestData[currentCountry][currentCity]["name"]] =
           (mapped / total) * 100;
