@@ -198,17 +198,16 @@ function setOption(selectElement: HTMLSelectElement, value) {
               },
             },
           });
-          const arrayIndex = requestData["sources"].length - 1;
-          const unmapped = requestData["sources"][arrayIndex]["-"];
-          let mapped = requestData["sources"][arrayIndex]["wikidata"];
-          if (requestData["sources"][arrayIndex]["csv"]) {
-            mapped += requestData["sources"][arrayIndex]["csv"];
+          const unmapped = requestData["sources"][0]["-"];
+          let mapped = requestData["sources"][0]["wikidata"];
+          if (requestData["sources"][0]["csv"]) {
+            mapped += requestData["sources"][0]["csv"];
           }
-          if (requestData["sources"][arrayIndex]["config"]) {
-            mapped += requestData["sources"][arrayIndex]["config"];
+          if (requestData["sources"][0]["config"]) {
+            mapped += requestData["sources"][0]["config"];
           }
-          if (requestData["sources"][arrayIndex]["event"]) {
-            mapped += requestData["sources"][arrayIndex]["event"];
+          if (requestData["sources"][0]["event"]) {
+            mapped += requestData["sources"][0]["event"];
           }
           const total = unmapped + mapped;
 
