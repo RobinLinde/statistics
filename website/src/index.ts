@@ -2,6 +2,7 @@
 
 import Chart from "../node_modules/chart.js/auto";
 import "chartjs-adapter-date-fns";
+import "bootstrap/js/dist/collapse";
 
 function setOption(selectElement: HTMLSelectElement, value) {
   const options = selectElement.options;
@@ -27,6 +28,9 @@ function setOption(selectElement: HTMLSelectElement, value) {
     function updateChart(city) {
       if (window.myChart1 != null) {
         window.myChart1.destroy();
+      }
+      if (window.myChart2 != null) {
+        window.myChart2.destroy();
       }
 
       if (city == "Choose a city") {
@@ -194,6 +198,48 @@ function setOption(selectElement: HTMLSelectElement, value) {
               },
             },
           });
+          const unmapped = requestData["sources"][0]["-"];
+          let mapped = requestData["sources"][0]["wikidata"];
+          if (requestData["sources"][0]["csv"]) {
+            mapped += requestData["sources"][0]["csv"];
+          }
+          if (requestData["sources"][0]["config"]) {
+            mapped += requestData["sources"][0]["config"];
+          }
+          if (requestData["sources"][0]["event"]) {
+            mapped += requestData["sources"][0]["event"];
+          }
+          const total = unmapped + mapped;
+
+          const ctx2 = document
+            .getElementById("completionChart")
+            .getContext("2d");
+          window.myChart2 = new Chart(ctx2, {
+            type: "doughnut",
+
+            data: {
+              labels: ["Etymology known", "Etymology unknown"],
+              datasets: [
+                {
+                  data: [(mapped / total) * 100, (unmapped / total) * 100],
+                  backgroundColor: ["green", "red"],
+                },
+              ],
+            },
+            options: {
+              circumference: 180,
+              rotation: -90,
+              plugins: {
+                tooltip: {
+                  callbacks: {
+                    label: function (tooltipItem) {
+                      return tooltipItem.label+" ("+tooltipItem.parsed.toFixed(1)+"%)";
+                    },
+                  },
+                },
+              },
+            },
+          });
         };
       }
     }
@@ -233,10 +279,10 @@ function setOption(selectElement: HTMLSelectElement, value) {
 
       const urlParams = new URLSearchParams(window.location.search);
       const cityFromUrl = urlParams.get("city");
-  
-      if(cityFromUrl){
-        updateChart(cityFromUrl)
-        setOption(dropdown, cityFromUrl)
+
+      if (cityFromUrl) {
+        updateChart(cityFromUrl);
+        setOption(dropdown, cityFromUrl);
       }
     };
   };

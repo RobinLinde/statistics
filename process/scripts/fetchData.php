@@ -42,10 +42,8 @@ foreach ($submodules as $submodule)
         }
 
         if(!empty($statisticsFile) or !empty($sourcesFile)){
-            $statistics = array_merge($statisticsFile, $statisticsArray);
-            $sources = array_merge($sourcesFile, $sourcesArray);
-            ksort($statistics);
-            ksort($sources);
+            $statistics = $statisticsFile + $statisticsArray;
+            $sources = $sourcesFile + $sourcesArray;
         }
         else {
             $statistics = $statisticsArray;
@@ -160,7 +158,7 @@ function get_history(string $owner, string $repo, string $file, string $api_key,
             $data = (string) $response->getBody();
             $data = json_decode($data, true);
 
-            $statistics[$commit['commit']['committer']['date']]=json_decode(base64_decode($data['content']), true);
+            $statistics[strtotime($commit['commit']['committer']['date'])]=json_decode(base64_decode($data['content']), true);
         }
 
     }
