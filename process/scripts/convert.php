@@ -36,7 +36,9 @@ foreach ($cities as $country)
     {
         $currentCity = key($country);
         $statisticsJson = json_decode(file_get_contents($directory.'/'.$currentCountry.'/'.$currentCity.'-statistics.json'),true);
+        array_multisort($statisticsJson, SORT_DESC, SORT_REGULAR);
         $sourcesJson = json_decode(file_get_contents($directory.'/'.$currentCountry.'/'.$currentCity.'-sources.json'), true);
+        array_multisort($sourcesJson, SORT_DESC, SORT_REGULAR);
         next($country);
 
         $statisticsArray = array();
