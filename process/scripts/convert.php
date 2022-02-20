@@ -36,10 +36,10 @@ foreach ($cities as $country)
     {
         $currentCity = key($country);
         $statisticsJson = json_decode(file_get_contents($directory.'/'.$currentCountry.'/'.$currentCity.'-statistics.json'),true);
-        foreach($statisticsJson as $timestamp => $data) $statisticsJson[$timestamp]['x'] = $timestamp;
+        foreach($statisticsJson as $timestamp => $data) $statisticsJson[$timestamp]['x'] = $timestamp*1000;
         krsort($statisticsJson);
         $sourcesJson = json_decode(file_get_contents($directory.'/'.$currentCountry.'/'.$currentCity.'-sources.json'), true);
-        foreach($sourcesJson as $timestamp => $data) $sourcesJson[$timestamp]['x'] = $timestamp;
+        foreach($sourcesJson as $timestamp => $data) $sourcesJson[$timestamp]['x'] = $timestamp*1000;
         krsort($sourcesJson);
         next($country);
 
