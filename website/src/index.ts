@@ -2,6 +2,7 @@
 
 import Chart from "../node_modules/chart.js/auto";
 import "chartjs-adapter-date-fns";
+import "bootstrap/js/dist/collapse";
 
 function setOption(selectElement: HTMLSelectElement, value) {
   const options = selectElement.options;
@@ -210,8 +211,6 @@ function setOption(selectElement: HTMLSelectElement, value) {
             mapped += requestData["sources"][arrayIndex]["event"];
           }
           const total = unmapped + mapped;
-          console.log(mapped);
-          console.log(total);
 
           const ctx2 = document
             .getElementById("completionChart")

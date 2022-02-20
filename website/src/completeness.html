@@ -7,7 +7,7 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
     <link href="./style.scss" rel="stylesheet" />
-    <title>EqualStreetNames statistics</title>
+    <title>EqualStreetNames statistics - completeness of all cities</title>
   </head>
 
   <body class="d-flex flex-column h-100">
@@ -29,31 +29,18 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link" href="./completeness.html">Completeness</a>
+                <a class="nav-link" href="./index.html">Per-city statistics</a>
               </li>
               </li>
             </ul>
           </div>
-          <form class="d-flex">
-            <select
-              id="city-dropdown"
-              class="form-select"
-              aria-label="Select a city"
-            ></select>
-          </form>
         </div>
       </nav>
     </header>
     <main class="flex-shrink-0">
       <div class="container">
-        <div class="alert alert-primary" id="noCity" role="alert">
-          Please select a city
-        </div>
         <div id="chart">
           <canvas id="statsChart"></canvas>
-        </div>
-        <div id="secondchart">
-          <canvas id="completionChart"></canvas>
         </div>
       </div>
     </main>
@@ -65,6 +52,6 @@
         >
       </div>
     </footer>
-    <script src="./index.ts" type="module"></script>
+    <script src="./completeness.ts" type="module"></script>
   </body>
 </html>
