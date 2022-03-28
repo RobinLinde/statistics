@@ -60,6 +60,7 @@ request.onload = function () {
             data: {
               datasets: [
                 {
+                  label: "Completeness",
                   data: chartData,
                 },
               ],
@@ -80,5 +81,4 @@ request.onload = function () {
       };
     }
   }
-  console.log(chartData);
 };
