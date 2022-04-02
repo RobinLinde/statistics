@@ -53,6 +53,12 @@
       "url": "https://nivelles.equalstreetnames.be/"
     }
   },
+  "estonia": {
+    "tallinn": {
+      "name": "🇪🇪 Tallinn, Estonia",
+      "url": "https://tallinn.equalstreetnames.eu/"
+    }
+  },
   "france": {
     "saint-brieuc": {
       "name": "🇫🇷 Saint-Brieuc, France",
@@ -83,6 +89,10 @@
     "halle-saale": {
       "name": "🇩🇪 Halle (Saale), Germany",
       "url": "https://halle-saale.equalstreetnames.eu/"
+    },
+    "kaiserslautern": {
+      "name": "🇩🇪 Kaiserslautern, Germany",
+      "url": "https://kaiserslautern.equalstreetnames.eu/"
     },
     "leipzig": {
       "name": "🇩🇪 Leipzig, Germany",
